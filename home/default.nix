@@ -55,9 +55,8 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     kitty = {
-      enable = true;
-      source = "apps/kitty";
-      target = ".config/kitty";
+      source = "./kitty/kitty.conf";
+      target = "${config.xdg.configHome}/kitty/kitty.conf";
     };
 
     # # You can also set the file content immediately.

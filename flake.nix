@@ -18,7 +18,9 @@
 
     homeConfigurations.caleb = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./users/caleb.nix ];
+      modules = [ 
+        ./home
+      ];
     };
   };
 }
