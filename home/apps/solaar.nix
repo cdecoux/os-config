@@ -1,6 +1,5 @@
 { inputs, config, pkgs, lib, ... }:
 
-
 let
   app = "solaar";
 in {
@@ -11,9 +10,8 @@ in {
     file = {
       "${app}"= {
         enable = true;
-        source = config.lib.file.mkOutOfStoreSymlink "${inputs.self}/dotfiles/${app}";
+        source = config.lib.meta.mkMutableSymlink "./config/${app}";
         target = "${config.xdg.configHome}/${app}";
-        recursive = true;
       };
     };
 

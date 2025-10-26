@@ -5,10 +5,16 @@
   config,
   pkgs,
   ...
-}: 
+}: with lib;
 
 
 {
+  lib.meta = {
+    configPath = "${config.home.homeDirectory}/os-config";
+    mkMutableSymlink = path: config.lib.file.mkOutOfStoreSymlink
+      (config.lib.meta.configPath + removePrefix (toString inputs.self) (toString path));
+  };
+
   nixpkgs = {
     config = {
       allowUnfree = true;

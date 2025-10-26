@@ -1,18 +1,17 @@
 { inputs, config, pkgs, lib, ... }:
 
-{
-
-
+let
+  app = "kitty";
+in {
   home = {
     packages = [
       pkgs.kitty
     ];
     file = {
-      kitty = {
+      "${app}"= {
         enable = true;
-        source = config.lib.file.mkOutOfStoreSymlink "${inputs.self}/dotfiles/kitty";
-        target = "${config.xdg.configHome}/kitty";
-        recursive = true;
+        source = config.lib.meta.mkMutableSymlink "./config/${app}";
+        target = "${config.xdg.configHome}/${app}";
       };
     };
 
