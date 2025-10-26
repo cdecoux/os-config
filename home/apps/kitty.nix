@@ -10,7 +10,7 @@ in {
     file = {
       "${app}"= {
         enable = true;
-        source = config.lib.meta.mkMutableSymlink "./config/${app}";
+        source = config.lib.meta.mkDotfilesSymLink ".config/${app}";
         target = "${config.xdg.configHome}/${app}";
       };
     };

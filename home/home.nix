@@ -7,12 +7,12 @@
   ...
 }: with lib;
 
-
-{
+let
+  dotfilesPath = "${config.home.homeDirectory}/os-config/home/.dotfiles";
+in {
   lib.meta = {
-    configPath = "${config.home.homeDirectory}/os-config";
-    mkMutableSymlink = path: config.lib.file.mkOutOfStoreSymlink
-      (config.lib.meta.configPath + removePrefix (toString inputs.self) (toString path));
+    mkDotfilesSymLink = path: config.lib.file.mkOutOfStoreSymlink
+      ("${config.home.homeDirectory}/.dotfiles/" + path);
   };
 
   nixpkgs = {
@@ -55,6 +55,13 @@
       pkgs.claude-code
       pkgs.code-cursor
     ];
+
+    file = {
+      dotfiles = {
+        source = config.lib.file.mkOutOfStoreSymlink dotfilesPath;
+        target = "${config.home.homeDirectory}/.dotfiles";
+      };
+    };
   };
 
   

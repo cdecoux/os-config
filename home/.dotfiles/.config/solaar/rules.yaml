@@ -3,27 +3,27 @@
 - Rule:
   - MouseGesture: Smart Shift
   - KeyPress:
-    - [Control_L, Alt_L, Up]
+    - Super_L
     - click
 - Rule:
   - MouseGesture: [Smart Shift, Mouse Right]
   - KeyPress:
-    - [Control_L, Alt_L, Right]
+    - [Super_L, Alt_L, Right]
     - click
 - Rule:
   - MouseGesture: [Smart Shift, Mouse Left]
   - KeyPress:
-    - [Control_L, Alt_L, Left]
+    - [Super_L, Alt_L, Left]
     - click
 - Rule:
   - MouseGesture: [Smart Shift, Mouse Up]
   - KeyPress:
-    - [Control_L, Alt_L, Up]
+    - [Super_L, Alt_L, Up]
     - click
 - Rule:
   - MouseGesture: [Smart Shift, Mouse Down]
   - KeyPress:
-    - [Control_L, Alt_L, Down]
+    - [Super_L, Alt_L, Down]
     - click
 ...
 ---
@@ -45,12 +45,12 @@
 ...
 ---
 - Rule:
-  - Test: [thumb_wheel_up, 0xa]
+  - Test: [thumb_wheel_up, 10]
   - KeyPress:
     - XF86_AudioRaiseVolume
     - click
 - Rule:
-  - Test: [thumb_wheel_down, 0xa]
+  - Test: [thumb_wheel_down, 10]
   - KeyPress:
     - XF86_AudioLowerVolume
     - click
