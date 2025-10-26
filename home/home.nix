@@ -22,9 +22,10 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   imports = [
-    ./apps/zsh
-    ./apps/neovim
-    ./apps/kitty
+    ./apps/zsh.nix
+    ./apps/neovim.nix
+    ./apps/kitty.nix
+    ./apps/solaar.nix
   ];
   
   # Home Manager needs a bit of information about you and the paths it should
@@ -38,7 +39,6 @@
       # EDITOR = "emacs";
     };
     packages = [
-      pkgs.solaar
       pkgs.discord                                                                          
       pkgs.tdrop                                                                            
       pkgs.synology-drive-client                                                            

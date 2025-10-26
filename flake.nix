@@ -41,26 +41,6 @@
       };
     };
 
-    # nixosConfigurations = {
-    #   fw-nixos = nixpkgs.lib.nixosSystem {
-    #     system = "x86_64-linux";
-    #     specialArgs = { inherit inputs; };
-    #     modules = [ 
-    #       ./hosts/fw-nixos/configuration.nix
-    #       home-manager.nixosModules.home-manager
-    #         {
-    #           home-manager.useGlobalPkgs = true;
-    #           home-manager.useUserPackages = true;
-    #           home-manager.users.caleb = ./home/home.nix;
-
-    #           # Optionally, use home-manager.extraSpecialArgs to pass
-    #           # arguments to home.nix
-    #         }
-    #     ];
-    #   };
-    # }
-
-
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
