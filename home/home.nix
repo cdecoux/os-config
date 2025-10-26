@@ -31,7 +31,7 @@ in {
   # environment.
   imports = [
     ./apps/zsh.nix
-    ./apps/neovim.nix
+    ./apps/neovim-raw.nix
     ./apps/kitty.nix
     ./apps/solaar.nix
   ];
