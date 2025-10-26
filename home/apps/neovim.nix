@@ -8,6 +8,7 @@ in {
 	home.packages = [
 		pkgs.ripgrep
     pkgs.tree-sitter
+    pkgs.fd
 	];
   programs.neovim = {
 	  enable = true;
