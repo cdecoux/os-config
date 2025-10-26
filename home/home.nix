@@ -9,10 +9,12 @@
 
 let
   dotfilesPath = "${config.home.homeDirectory}/os-config/home/.dotfiles";
+  linkedDotfilesPath = "${config.home.homeDirectory}/.dotfiles";
 in {
   lib.meta = {
+    # Helper function for creating mutable dotfiles that link back to this repo
     mkDotfilesSymLink = path: config.lib.file.mkOutOfStoreSymlink
-      ("${config.home.homeDirectory}/.dotfiles/" + path);
+      ("${linkedDotfilesPath}/" + path);
   };
 
   nixpkgs = {
@@ -44,22 +46,23 @@ in {
     sessionVariables = {
       # EDITOR = "emacs";
     };
-    packages = [
-      pkgs.discord                                                                          
-      pkgs.tdrop                                                                            
-      pkgs.synology-drive-client                                                            
-      pkgs.moonlight-qt                                                                     
-      pkgs.easyeffects                                                                      
-      pkgs.bitwarden                                                                        
-      pkgs.vscode
-      pkgs.claude-code
-      pkgs.code-cursor
+    packages = with pkgs; [
+      gcc
+      discord                                                                          
+      tdrop                                                                            
+      synology-drive-client                                                            
+      moonlight-qt                                                                     
+      easyeffects                                                                      
+      bitwarden                                                                        
+      vscode
+      claude-code
+      code-cursor
     ];
 
     file = {
       dotfiles = {
         source = config.lib.file.mkOutOfStoreSymlink dotfilesPath;
-        target = "${config.home.homeDirectory}/.dotfiles";
+        target = linkedDotfilesPath;
       };
     };
   };
