@@ -8,12 +8,14 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nix.url = "github:cdecoux/neovim-nix";
   };
 
   outputs = {
       self,
       nixpkgs, 
-      home-manager, 
+      home-manager,
+      neovim-nix,
       ... 
     } @ inputs: let
       inherit (self) outputs; 
@@ -24,6 +26,8 @@
       # This is a function that generates an attribute (genAttrs) by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
   in {
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
@@ -46,8 +50,13 @@
     homeConfigurations = {
       "caleb@fw-nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
+          {
+              imports = [neovim-nix.homeModule];
+              nvim.enable = true;
+            }
           ./home/home.nix
         ];
       };
