@@ -8,41 +8,49 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    alejandra = {
+      url = "github:kamadorueda/alejandra/4.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nix.url = "github:cdecoux/neovim-nix";
   };
 
   outputs = {
-      self,
-      nixpkgs, 
-      home-manager,
-      neovim-nix,
-      ... 
-    } @ inputs: let
-      inherit (self) outputs; 
-      # Supported systems for your flake packages, shell, etc.
-      systems = [
-        "x86_64-linux"
-      ];
-      # This is a function that generates an attribute (genAttrs) by calling a function you
-      # pass to it, with each system as an argument
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-
-      pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
+    self,
+    nixpkgs,
+    home-manager,
+    alejandra,
+    neovim-nix,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "x86_64-linux"
+    ];
+    # This is a function that generates an attribute (genAttrs) by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      fw-nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/fw-nixos/configuration.nix
-        ];
-      };
+      fw-nixos = let
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+            {
+              environment.systemPackages = [alejandra.defaultPackage.${system}];
+            }
+            ./hosts/fw-nixos/configuration.nix
+          ];
+        };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -54,9 +62,9 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           {
-              imports = [neovim-nix.homeModule];
-              nvim.enable = true;
-            }
+            imports = [neovim-nix.homeModule];
+            nvim.enable = true;
+          }
           ./home/home.nix
         ];
       };
