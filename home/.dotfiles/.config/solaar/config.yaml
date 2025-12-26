@@ -6,7 +6,8 @@
     m-key-leds, mr-key-led, multiplatform, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer, adc_power_management]
   _battery: 4100
   _modelId: B03400000000
-  _sensitive: {divert-keys: false, hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore, smart-shift: false, thumb-scroll-mode: false}
+  _sensitive: {divert-keys: false, hires-scroll-mode: true, hires-smooth-invert: false, hires-smooth-resolution: false, scroll-ratchet: false, smart-shift: false,
+    thumb-scroll-mode: false}
   _serial: BE0183C1
   _unitId: BE0183C1
   _wpid: B034

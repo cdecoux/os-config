@@ -88,11 +88,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1762198286,
-        "narHash": "sha256-SDy1xeJlvQ1oM1KcOaxLXs0GTBiuZXSVVe6pqbaED2s=",
+        "lastModified": 1762231675,
+        "narHash": "sha256-tURANFx55uXrlNMG8W3VnBNnkwhi+0uV0ZjN/hV8LdE=",
         "owner": "cdecoux",
         "repo": "neovim-nix",
-        "rev": "d252446540d201ef68d003c4970913401a32f90f",
+        "rev": "01ad235b9e7b2a6ab0e1282122f5d963725a2561",
         "type": "github"
       },
       "original": {
