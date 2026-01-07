@@ -44,7 +44,7 @@ in {
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       stateVersion = "23.05";
       sessionVariables = {
-        # EDITOR = "emacs";
+        EDITOR = "vim";
       };
       packages = with pkgs; [
         gcc
@@ -57,6 +57,7 @@ in {
         vscode
         claude-code
         code-cursor
+        sops
       ];
 
       file = {

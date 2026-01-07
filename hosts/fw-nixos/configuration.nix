@@ -95,8 +95,12 @@
   users.users.caleb = {
     isNormalUser = true;
     description = "Caleb DeCoux";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
+  };
+
+  virtualisation.docker = {
+    enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
