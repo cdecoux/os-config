@@ -1,5 +1,8 @@
-.PHONY: vm
+.PHONY: vm homelab-switch
 
+
+homelab-switch:
+	nixos-rebuild switch --flake .#homelab-nix --target-host admin@192.168.0.145 --use-remote-sudo
 
 vm:
 	nixos-rebuild build-vm --flake .#homelab-nix

@@ -6,7 +6,7 @@
   ...
 }: {
   networking.hostName = "homelab-nix"; # Define your hostname.
-  nix.trusted-users = ["root" "admin"];
+  nix.settings.trusted-users = ["admin"];
   users.groups.admin = {};
   users.users = {
     admin = {
