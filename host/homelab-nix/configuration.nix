@@ -5,6 +5,10 @@
   pkgs,
   ...
 }: {
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "homelab-nix"; # Define your hostname.
   nix.settings.trusted-users = ["admin"];
   users.groups.admin = {};
