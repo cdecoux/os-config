@@ -51,7 +51,7 @@
             {
               environment.systemPackages = [alejandra.defaultPackage.${system}];
             }
-            ./hosts/fw-nixos/configuration.nix
+            ./host/fw-nixos/configuration.nix
           ];
         };
       
@@ -64,7 +64,7 @@
             {
               environment.systemPackages = [alejandra.defaultPackage.${system}];
             }
-            ./hosts/homelab-nix/configuration.nix
+            ./host/homelab-nix/configuration.nix
           ];
         };
     };
@@ -81,7 +81,7 @@
             imports = [neovim-nix.homeModule];
             nvim.enable = true;
           }
-          ./home/caleb/home.nix
+          ./user/caleb/home.nix
         ];
       };
     };

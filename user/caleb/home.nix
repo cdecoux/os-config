@@ -8,7 +8,7 @@
 }:
 with lib; let
   username = "caleb";
-  dotfilesPath = "${config.home.homeDirectory}/os-config/home/${username}/.dotfiles";
+  dotfilesPath = "${config.home.homeDirectory}/os-config/user/${username}/.dotfiles";
   linkedDotfilesPath = "${config.home.homeDirectory}/.dotfiles";
 in {
   # The home.packages option allows you to install Nix packages into your
