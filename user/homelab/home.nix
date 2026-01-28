@@ -52,6 +52,7 @@ in {
 
   systemd.user.services.homelab-docker = {
     Install.WantedBy = ["default.target"];
+    Install.Wants = ["sops-nix.service"];
     Unit = {
       Description = "Homelab docker containers via docker-compose";
       After = "sops-nix.service";
@@ -65,5 +66,11 @@ in {
       ExecStart = "/run/current-system/sw/bin/docker compose up --detach --build";
       ExecStop = "/run/current-system/sw/bin/docker compose stop";
     };
+  };
+
+  systemd.user.paths.homelab-docker = {
+    Unit.Description = "Watch docker-compose.yaml for changes";
+    Install.WantedBy = ["default.target"];
+    Path.PathModified = containersPath;
   };
 }

@@ -73,6 +73,15 @@
             disko.nixosModules.disko
             {environment.systemPackages = [alejandra.defaultPackage.${system}];}
             ./host/homelab-nix/configuration.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.users.admin = ./user/homelab/home.nix;
+              home-manager.sharedModules = [
+                inputs.sops-nix.homeManagerModules.sops
+              ];
+            }
           ];
         };
     };

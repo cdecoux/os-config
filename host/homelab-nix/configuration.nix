@@ -56,7 +56,6 @@
     enable = true;
     # Customize Docker daemon settings using the daemon.settings option
     daemon.settings = {
-      dns = ["1.1.1.1" "8.8.8.8"];
       log-driver = "journald";
       storage-driver = "overlay2";
     };
