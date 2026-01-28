@@ -59,6 +59,7 @@ in {
         claude-code
         code-cursor
         sops
+        go-task
       ];
 
       file = {

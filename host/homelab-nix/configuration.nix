@@ -3,17 +3,37 @@
   config,
   lib,
   pkgs,
+  modulesPath,
   ...
 }: {
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
+    ./disko.nix
+    ./networking.nix
+    ./nfs.nix
+    ./hardware-configuration.nix
+  ];
+
+  boot.loader.grub = {
+    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+    # devices = [ ];
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
 
   networking.hostName = "homelab-nix"; # Define your hostname.
+  networking.firewall.allowedTCPPorts = [22];
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
+
   nix.settings.trusted-users = ["admin"];
   users.groups.admin = {};
   users.users = {
     admin = {
+      initialPassword = "admin";
       isNormalUser = true;
       extraGroups = ["wheel" "docker"];
       group = "admin";
@@ -25,19 +45,10 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
-
-  networking.firewall.allowedTCPPorts = [22];
   environment.systemPackages = with pkgs; [
     htop
-  ];
-
-  imports = [
-    ./networking.nix
-    ./nfs.nix
+    curl
+    git
   ];
 
   virtualisation.docker = {
