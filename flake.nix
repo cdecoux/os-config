@@ -47,6 +47,7 @@
       in
         nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
+          inherit system;
           modules = [
             {
               environment.systemPackages = [alejandra.defaultPackage.${system}];
@@ -60,10 +61,12 @@
       in
         nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
+          inherit system;
           modules = [
-            {
-              environment.systemPackages = [alejandra.defaultPackage.${system}];
-            }
+            ({ pkgs, modulesPath, ... }: {
+            imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
+            environment.systemPackages = [ alejandra.defaultPackage.${system} ];
+            })
             ./host/homelab-nix/configuration.nix
           ];
         };

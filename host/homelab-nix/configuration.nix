@@ -5,6 +5,8 @@
   pkgs,
   ...
 }: {
+  networking.hostName = "homelab-nix"; # Define your hostname.
+  nix.trusted-users = ["root" "admin"];
   users.groups.admin = {};
   users.users = {
     admin = {
