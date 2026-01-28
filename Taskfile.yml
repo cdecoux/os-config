@@ -1,17 +1,12 @@
 version: '3'
 
 tasks:
-
-  homelab-switch:
-    cmds:
-      - nixos-rebuild switch --flake .#homelab-nix --target-host admin@{{ .HOMELAB_HOST }} --use-remote-sudo
-
   deploy:*:*:
     vars:
       NIXCONFIG_NAME: '{{index .MATCH 0}}'
       TARGET_HOST: '{{index .MATCH 1}}'
     cmds:
-      - nixos-rebuild switch --flake .#{{.NIXCONFIG_NAME}} --target-host {{ .TARGET_HOST }} --use-remote-sudo
+      - nixos-rebuild switch --flake .#{{.NIXCONFIG_NAME}} --target-host {{ .TARGET_HOST }} --use-remote-sudo {{.CLI_ARGS}}
   
   install:*:*:
     vars:
@@ -20,5 +15,5 @@ tasks:
     cmd: |
       nix run github:nix-community/nixos-anywhere -- \
       --generate-hardware-config nixos-generate-config ./host/{{.NIXCONFIG_NAME}}/hardware-configuration.nix \
-      --flake .#{{.NIXCONFIG_NAME}} --target-host {{.TARGET_HOST}}
+      --flake .#{{.NIXCONFIG_NAME}} --target-host {{.TARGET_HOST}} {{.CLI_ARGS}}
 
