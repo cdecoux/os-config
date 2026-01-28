@@ -7,7 +7,8 @@
   ...
 }:
 with lib; let
-  dotfilesPath = "${config.home.homeDirectory}/os-config/home/.dotfiles";
+  username = "caleb";
+  dotfilesPath = "${config.home.homeDirectory}/os-config/home/${username}/.dotfiles";
   linkedDotfilesPath = "${config.home.homeDirectory}/.dotfiles";
 in {
   # The home.packages option allows you to install Nix packages into your
@@ -39,8 +40,8 @@ in {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
     home = {
-      username = "caleb";
-      homeDirectory = "/home/caleb";
+      username = "${username}";
+      homeDirectory = "/home/${username}";
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       stateVersion = "23.05";
       sessionVariables = {

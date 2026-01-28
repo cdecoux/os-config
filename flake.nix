@@ -13,6 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nix.url = "github:cdecoux/neovim-nix";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -21,6 +23,7 @@
     home-manager,
     alejandra,
     neovim-nix,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -51,6 +54,19 @@
             ./hosts/fw-nixos/configuration.nix
           ];
         };
+      
+      homelab-nix = let 
+        system = "x86_64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+            {
+              environment.systemPackages = [alejandra.defaultPackage.${system}];
+            }
+            ./hosts/homelab-nix/configuration.nix
+          ];
+        };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -65,7 +81,7 @@
             imports = [neovim-nix.homeModule];
             nvim.enable = true;
           }
-          ./home/home.nix
+          ./home/caleb/home.nix
         ];
       };
     };
