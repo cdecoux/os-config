@@ -84,13 +84,19 @@ services:
     restart: unless-stopped
 
 
-  homeassistant:
+  home-assistant:
     image: ghcr.io/home-assistant/home-assistant:stable
     restart: unless-stopped
+    privileged: true
+    network_mode: host
+    ports:
+      - 8123:8123
     environment:
       - TZ=${TZ}
     volumes:
       - /vault/homelab/volumes/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
 
 
 #  discord-bot:

@@ -54,7 +54,7 @@ in {
         synology-drive-client
         moonlight-qt
         easyeffects
-        bitwarden
+        bitwarden-desktop
         vscode
         claude-code
         code-cursor

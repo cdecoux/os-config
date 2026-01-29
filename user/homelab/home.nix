@@ -52,10 +52,9 @@ in {
 
   systemd.user.services.homelab-docker = {
     Install.WantedBy = ["default.target"];
-    Install.Wants = ["sops-nix.service"];
     Unit = {
       Description = "Homelab docker containers via docker-compose";
-      After = "sops-nix.service";
+      Wants = "sops-nix.service";
     };
     Service = {
       Type = "oneshot";
