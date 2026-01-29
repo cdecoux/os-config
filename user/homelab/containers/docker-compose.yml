@@ -1,7 +1,20 @@
-#include:
-#  - git@github.com:cdecoux/homelab-services.git#main:nox/docker-compose.yml
-
 services:
+  registry:
+    restart: always
+    image: registry:3
+    ports:
+      - 5000:5000
+    environment:
+      #REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      #REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+      #REGISTRY_AUTH: htpasswd
+      #REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      #REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+    volumes:
+      - /vault/homelab/volumes/registry/data:/var/lib/registry
+      - /vault/homelab/volumes/registry/certs:/certs
+      - /vault/homelab/volumes/registry/auth:/auth
+
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
     # Choose the appropriate tag based on your need:

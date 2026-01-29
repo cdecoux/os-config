@@ -14,6 +14,7 @@ in {
 
   imports = [
     ./gitconfig.nix
+    ./homelab-services.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -61,13 +62,13 @@ in {
       Wants = "sops-nix.service";
     };
     Service = {
-      User = "admin";
-      Group = "admin";
       Type = "oneshot";
       RemainAfterExit = "yes";
+      Restart = "on-failure";
+      RestartSec = "30";
       WorkingDirectory = containersPath;
       EnvironmentFile = "${config.xdg.configHome}/sops-nix/secrets/docker.env";
-      Environment = "COMPOSE_PROJECT_NAME=homelab";
+      Environment = "COMPOSE_PROJECT_NAME=homelab GIT_SSH_COMMAND=/run/current-system/sw/bin/ssh";
       ExecStart = "/run/current-system/sw/bin/docker compose up --detach --build --remove-orphans";
       ExecStop = "/run/current-system/sw/bin/docker compose stop";
       ExecReload = "/run/current-system/sw/bin/docker compose up --detach --build --remove-orphans";

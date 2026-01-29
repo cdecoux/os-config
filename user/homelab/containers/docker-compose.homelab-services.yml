@@ -1,0 +1,3 @@
+include:
+  - git@github.com:cdecoux/homelab-services.git#main:nox/docker-compose.yml
+
