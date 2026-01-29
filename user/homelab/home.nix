@@ -62,14 +62,19 @@ in {
       WorkingDirectory = containersPath;
       EnvironmentFile = "${config.xdg.configHome}/sops-nix/secrets/docker.env";
       Environment = "COMPOSE_PROJECT_NAME=homelab";
-      ExecStart = "/run/current-system/sw/bin/docker compose up --detach --build";
+      ExecStart = "/run/current-system/sw/bin/docker compose up --detach --build --remove-orphans";
       ExecStop = "/run/current-system/sw/bin/docker compose stop";
+      ExecReload = "/run/current-system/sw/bin/docker compose up --detach --build --remove-orphans";
     };
   };
 
   systemd.user.paths.homelab-docker = {
     Unit.Description = "Watch docker-compose.yaml for changes";
     Install.WantedBy = ["default.target"];
-    Path.PathModified = containersPath;
+    Path = {
+      # Watch the symlink itself for changes (when home-manager updates it)
+      PathChanged = containersPath;
+      Unit = "homelab-docker.service";
+    };
   };
 }

@@ -13,6 +13,7 @@
     ./networking.nix
     ./nfs.nix
     ./hardware-configuration.nix
+    ./docker-ports.nix
   ];
 
   boot.loader.grub = {
@@ -50,6 +51,7 @@
     htop
     curl
     git
+    usbutils
   ];
 
   virtualisation.docker = {

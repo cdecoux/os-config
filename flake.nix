@@ -71,11 +71,13 @@
           inherit system;
           modules = [
             disko.nixosModules.disko
-            {environment.systemPackages = [alejandra.defaultPackage.${system}];}
             ./host/homelab-nix/configuration.nix
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
+            neovim-nix.nixosModule
             {
+              nvim.enable = true;
+              environment.systemPackages = [alejandra.defaultPackage.${system}];
               home-manager.useUserPackages = true;
               home-manager.users.admin = ./user/homelab/home.nix;
               home-manager.sharedModules = [
