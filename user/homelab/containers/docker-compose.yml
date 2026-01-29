@@ -93,6 +93,8 @@ services:
       - 8123:8123
     environment:
       - TZ=${TZ}
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
       - /vault/homelab/volumes/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
