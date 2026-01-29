@@ -1,3 +1,6 @@
+#include:
+#  - git@github.com:cdecoux/homelab-services.git#main:nox/docker-compose.yml
+
 services:
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
@@ -89,8 +92,6 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
-    ports:
-      - 8123:8123
     environment:
       - TZ=${TZ}
     devices:

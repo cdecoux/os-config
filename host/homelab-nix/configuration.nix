@@ -30,6 +30,14 @@
     settings.PasswordAuthentication = false;
   };
 
+  programs.ssh = {
+    extraConfig = ''
+      Host github.com
+       HostName github.com
+       IdentityFile ~/.ssh/id_rsa
+    '';
+  };
+
   nix.settings.trusted-users = ["admin"];
   users.groups.admin = {};
   users.users = {
