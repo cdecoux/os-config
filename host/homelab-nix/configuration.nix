@@ -67,7 +67,12 @@
     # Customize Docker daemon settings using the daemon.settings option
     daemon.settings = {
       log-driver = "journald";
-      storage-driver = "overlay2";
+
+      features = {
+        containerd-snapshotter = true;
+      };
+
+      insecure-registries = ["homelab-nix:5000"];
     };
   };
 

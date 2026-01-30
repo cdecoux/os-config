@@ -103,6 +103,15 @@
     enable = true;
   };
 
+  # Enable containerd image store
+  virtualisation.docker.daemon.settings = {
+    features = {
+      containerd-snapshotter = true;
+    };
+
+    insecure-registries = ["homelab-nix:5000"];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
