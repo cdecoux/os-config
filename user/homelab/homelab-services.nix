@@ -23,13 +23,13 @@ in {
     };
   };
 
-  systemd.user.paths.homelab-services = {
-    Unit.Description = "Watch docker-compose.yaml for changes";
-    Install.WantedBy = ["default.target"];
-    Path = {
-      # Watch the symlink itself for changes (when home-manager updates it)
-      PathChanged = "${containersPath}/${filePath}";
-      Unit = "homelab-services.service";
-    };
-  };
+  # systemd.user.paths.homelab-services = {
+  #   Unit.Description = "Watch docker-compose.yaml for changes";
+  #   Install.WantedBy = ["default.target"];
+  #   Path = {
+  #     # Watch the symlink itself for changes (when home-manager updates it)
+  #     PathChanged = "${containersPath}/${filePath}";
+  #     Unit = "homelab-services.service";
+  #   };
+  # };
 }

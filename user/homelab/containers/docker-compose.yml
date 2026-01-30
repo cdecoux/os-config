@@ -1,19 +1,33 @@
 services:
+  # registry-init:
+  #   image: httpd:alpine
+  #   restart: "no"
+  #   entrypoint: htpasswd
+  #   command: -Bbn "$${REGISTRY_USER}" "$${REGISTRY_PASSWORD}" > /auth/htpasswd
+  #   environment:
+  #     - REGISTRY_USER=${REGISTRY_USER}
+  #     - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
+  #   volumes:
+  #     - /vault/homelab/volumes/registry/auth:/auth
+
   registry:
     restart: always
     image: registry:3
     ports:
       - 5000:5000
-    #environment:
-      #REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
-      #REGISTRY_HTTP_TLS_KEY: /certs/domain.key
-      #REGISTRY_AUTH: htpasswd
-      #REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
-      #REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+    # environment:
+    #   REGISTRY_HTTP_TLS_CERTIFICATE: /certs/${HOME_DOMAIN}.pem
+    #   REGISTRY_HTTP_TLS_KEY: /certs/${HOME_DOMAIN}.key
+    #   REGISTRY_AUTH: htpasswd
+    #   REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    #   REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
     volumes:
       - /vault/homelab/volumes/registry/data:/var/lib/registry
-      - /vault/homelab/volumes/registry/certs:/certs
+      - /vault/homelab/DNS/certs:/certs
       - /vault/homelab/volumes/registry/auth:/auth
+    depends_on:
+      registry-init:
+        condition: service_completed_successfully
 
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
