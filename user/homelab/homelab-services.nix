@@ -10,16 +10,16 @@ in {
       Wants = "sops-nix.service";
     };
     Service = {
-      Type = "oneshot";
-      RemainAfterExit = "yes";
+      Type = "simple";
       Restart = "on-failure";
       RestartSec = "30";
       WorkingDirectory = containersPath;
       EnvironmentFile = "${config.xdg.configHome}/sops-nix/secrets/docker.env";
+      TimeoutSec = 0;
       Environment = "COMPOSE_PROJECT_NAME=homelab-services GIT_SSH_COMMAND=/run/current-system/sw/bin/ssh";
-      ExecStart = "/run/current-system/sw/bin/docker compose -f ${filePath} up --detach --build --remove-orphans";
+      ExecStart = "/run/current-system/sw/bin/docker compose -f ${filePath} up --build --remove-orphans";
       ExecStop = "/run/current-system/sw/bin/docker compose -f ${filePath} stop";
-      ExecReload = "/run/current-system/sw/bin/docker compose -f ${filePath} up --detach --build --remove-orphans";
+      ExecReload = "/run/current-system/sw/bin/docker compose -f ${filePath} up --build --remove-orphans";
     };
   };
 

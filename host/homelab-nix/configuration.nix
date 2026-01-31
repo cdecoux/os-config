@@ -51,6 +51,7 @@
           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9NxiO2YcDOrIQqFBFyPK06lQAmd/Vrr+05KBxuZ7VbV4uVvV+s7h0DV7UrJ+x8OBnBI+bsf2CHsaYbbwlD50a9S3XRmSvI0TCaJP6ir8cBoLF8VAFOkezD2e43IuQHhXB7XOxx3wu3ptbjV9qI/WCTR7Jy/yG+KxBQ1q43HjJMa2Hwg62QJbBTf7NDWUynXUuI/i8tJkFt+1/DYyjFus/BcRr38ipZjFPK+x6TTzG5DOWlAWvYUs9eq57lHt3CagZ7L7dVgrY0QJ38fNsFfUGlBr1x+9FfJUjuWM/rN9c7FS7LhQJ5zjBWiMF217Z803DUMThkbjBGKe5S02bSOVvlMCWEnVVuYUOObEOWjRIR1HUL2ng8xU6VdcgeOlMPut5BBf40Cta/nk42nyzqeFE5yfEJ607n09mt3XLiupOFzbmMHJ0sA7iOfInNuf4i4msrTcGOgUFaQgegpf4dWCGjIBw0DhX6gJEGIpkqucmnPf8KUJbX25z5hg32L8vIqs="
         ];
       };
+      linger = true; # Systemd services enabled even without a login-session
     };
   };
   security.sudo.wheelNeedsPassword = false;
