@@ -24,19 +24,9 @@
   };
   boot.kernelModules = ["ip_tables"];
 
-  networking.hostName = "homelab-nix"; # Define your hostname.
-  networking.firewall.allowedTCPPorts = [22];
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
-  };
-
-  programs.ssh = {
-    extraConfig = ''
-      Host github.com
-       HostName github.com
-       IdentityFile ~/.ssh/id_rsa
-    '';
   };
 
   nix.settings.trusted-users = ["admin"];

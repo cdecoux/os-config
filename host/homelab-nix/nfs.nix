@@ -23,6 +23,12 @@ in {
         what = "${vaultServer}:/volume1/media";
         where = "/vault/media";
       })
+
+    (commonMountOptions
+      // {
+        what = "${vaultServer}:/volume2/nox";
+        where = "/vault/nox";
+      })
   ];
 
   # Add to automounts
@@ -36,5 +42,6 @@ in {
   in [
     (commonAutoMountOptions // {where = "/vault/media";})
     (commonAutoMountOptions // {where = "/vault/homelab";})
+    (commonAutoMountOptions // {where = "/vault/nox";})
   ];
 }

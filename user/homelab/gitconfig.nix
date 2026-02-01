@@ -6,6 +6,9 @@
         name = "Caleb DeCoux";
         email = "cdecoux@protonmail.com";
       };
+      core = {
+        sshCommand = "/run/current-system/sw/bin/ssh -i /vault/homelab/secrets/github_key";
+      };
       init.defaultBranch = "main";
       url = {
         "ssh://git@github.com/" = {
@@ -19,6 +22,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
