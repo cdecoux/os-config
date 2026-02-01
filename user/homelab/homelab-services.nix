@@ -3,11 +3,27 @@
   containersPath = "${config.home.homeDirectory}/containers";
   filePath = "docker-compose.homelab-services.yml";
 in {
+  systemd.user.services.homelab-registry-login = {
+    Install.WantedBy = ["default.target"];
+    Unit = {
+      Description = "docker login to registry";
+      Wants = "sops-nix.service homelab-docker.service";
+    };
+    Service = {
+      Type = "oneshot";
+      Restart = "on-failure";
+      RestartSec = "30";
+      EnvironmentFile = "${config.xdg.configHome}/sops-nix/secrets/docker.env";
+      TimeoutSec = 0;
+      ExecStart = "/run/current-system/sw/bin/docker login --password $REGISTRY_PASSWORD --username $REGISTRY_USER homelab-nix:5000";
+    };
+  };
+
   systemd.user.services.homelab-services = {
     Install.WantedBy = ["default.target"];
     Unit = {
       Description = "homelab-services docker containers via docker-compose";
-      Wants = "sops-nix.service";
+      Wants = "sops-nix.service homelab-registry-login.service";
     };
     Service = {
       Type = "simple";

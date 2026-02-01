@@ -22,6 +22,7 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
+  boot.kernelModules = ["ip_tables"];
 
   networking.hostName = "homelab-nix"; # Define your hostname.
   networking.firewall.allowedTCPPorts = [22];
