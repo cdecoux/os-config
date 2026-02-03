@@ -1,14 +1,2 @@
 include:
   - git@github.com:cdecoux/homelab-services.git#main:nox/docker-compose.yml
-
-
-services:
-  nox-tunnel:
-    image: cloudflare/cloudflared:latest
-    restart: always
-    command:
-      - "tunnel"
-      - "--no-autoupdate"
-      - "run"
-    environment:
-      - TUNNEL_TOKEN=${NOX_TUNNEL_TOKEN}

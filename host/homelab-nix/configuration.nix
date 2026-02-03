@@ -52,6 +52,7 @@
     curl
     git
     usbutils
+    lshw
   ];
 
   virtualisation.docker = {

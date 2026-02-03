@@ -3,8 +3,8 @@
   networking.firewall.allowedTCPPorts = [
     8123 # Home Assistant (host network mode)
     5000 # Registry
+    7777 # Service Port
     8080 # Service Port
     8091 # Service Port
   ];
 }
-

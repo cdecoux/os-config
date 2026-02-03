@@ -60,6 +60,7 @@ in {
         code-cursor
         sops
         go-task
+        obsidian
       ];
 
       file = {
