@@ -53,6 +53,7 @@
     git
     usbutils
     lshw
+    toybox
   ];
 
   virtualisation.docker = {

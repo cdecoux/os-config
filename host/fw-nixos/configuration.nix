@@ -86,6 +86,7 @@
     wget
     git
     gnumake
+    toybox
     pkgs.home-manager
   ];
 

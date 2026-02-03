@@ -31,6 +31,7 @@ in {
     };
     packages = with pkgs; [
       docker-compose
+      docker-buildx
     ];
 
     file = {
