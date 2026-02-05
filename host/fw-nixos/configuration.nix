@@ -26,6 +26,10 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
 
