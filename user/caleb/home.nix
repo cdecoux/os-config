@@ -55,6 +55,8 @@ in {
         moonlight-qt
         easyeffects
         bitwarden-desktop
+        arduino
+        libreoffice-still
         vscode
         claude-code
         code-cursor

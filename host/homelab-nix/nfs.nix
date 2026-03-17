@@ -20,7 +20,7 @@ in {
 
     (commonMountOptions
       // {
-        what = "${vaultServer}:/volume1/media";
+        what = "${vaultServer}:/volume2/media";
         where = "/vault/media";
       })
 

@@ -93,7 +93,14 @@
     toybox
     pkgs.home-manager
   ];
-
+  services.flatpak.enable = true;
+  system.activationScripts = {
+    flatpak = {
+      text = ''
+        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      '';
+    };
+  };
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh.enable = true;
 

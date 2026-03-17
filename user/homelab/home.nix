@@ -61,6 +61,8 @@ in {
     Unit = {
       Description = "Homelab docker containers via docker-compose";
       Wants = "sops-nix.service";
+      After = ["vault-homelab.mount" "vault-media.mount"];
+      RequiresMountsFor = ["/vault/homelab" "/vault/media"];
     };
     Service = {
       User = "admin";
