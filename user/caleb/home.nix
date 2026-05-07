@@ -63,6 +63,9 @@ in {
         sops
         go-task
         obsidian
+        pkgs.godot
+        pkgs.tenacity
+        pkgs.guvcview
       ];
 
       file = {
