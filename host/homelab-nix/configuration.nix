@@ -1,6 +1,5 @@
 # configuration.nix
 {
-  config,
   lib,
   pkgs,
   modulesPath,
@@ -14,6 +13,7 @@
     ./nfs.nix
     ./hardware-configuration.nix
     ./docker-ports.nix
+    ./rocm.nix
   ];
 
   boot.loader.grub = {
