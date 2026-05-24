@@ -2,7 +2,9 @@
   commonMountOptions = {
     type = "nfs";
     mountConfig = {
-      Options = "noatime";
+      # _netdev tells systemd this is a network device and should be unmounted early during shutdown
+      # soft,timeo=10 prevents hanging if NFS server is unreachable during shutdown
+      Options = "noatime,_netdev,soft,timeo=10";
     };
   };
   vaultServer = "vault";
