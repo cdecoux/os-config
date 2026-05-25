@@ -50,6 +50,7 @@ in {
       };
       packages = with pkgs; [
         gcc
+        dotnet-sdk_8
         discord
         tdrop
         synology-drive-client
@@ -68,6 +69,7 @@ in {
         pkgs.tenacity
         pkgs.guvcview
         pkgs.jetbrains-toolbox
+        pkgs.gnomeExtensions.appindicator
       ];
 
       file = {
@@ -75,6 +77,12 @@ in {
           source = config.lib.file.mkOutOfStoreSymlink dotfilesPath;
           target = linkedDotfilesPath;
         };
+      };
+    };
+
+    dconf.settings = {
+      "org/gnome/shell" = {
+        enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com"];
       };
     };
   };
