@@ -36,6 +36,7 @@ in {
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
     programs.firefox.enable = true;
+    programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -66,6 +67,7 @@ in {
         pkgs.godot
         pkgs.tenacity
         pkgs.guvcview
+        pkgs.jetbrains-toolbox
       ];
 
       file = {
