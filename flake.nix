@@ -3,10 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
+    nixpkgs-25 = {
+      url = "github:NixOS/nixpkgs/release-25.11";
+    };
     home-manager = {
       # Follow corresponding `release` branch from Home Manager
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-25 = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-25";
     };
     alejandra = {
       url = "github:kamadorueda/alejandra/4.0.0";
@@ -29,7 +36,9 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-25,
     home-manager,
+    home-manager-25,
     alejandra,
     neovim-nix,
     sops-nix,
@@ -69,14 +78,14 @@
       homelab-nix = let
         system = "x86_64-linux";
       in
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-25.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           inherit system;
           modules = [
             disko.nixosModules.disko
             ./host/homelab-nix/configuration.nix
             sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
+            home-manager-25.nixosModules.home-manager
             neovim-nix.nixosModule
             {
               nvim.enable = true;

@@ -8,6 +8,13 @@ tasks:
     cmds:
       - nixos-rebuild switch --flake .#{{.NIXCONFIG_NAME}} --target-host {{ .TARGET_HOST }} --use-remote-sudo {{.CLI_ARGS}}
   
+  build:*:*:
+    vars:
+      NIXCONFIG_NAME: '{{index .MATCH 0}}'
+      TARGET_HOST: '{{index .MATCH 1}}'
+    cmds:
+      - nixos-rebuild build --flake .#{{.NIXCONFIG_NAME}} --target-host {{ .TARGET_HOST }} --use-remote-sudo {{.CLI_ARGS}}
+  
   install:*:*:
     vars:
       NIXCONFIG_NAME: '{{index .MATCH 0}}'
